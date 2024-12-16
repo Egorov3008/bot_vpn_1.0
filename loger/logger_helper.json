@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "formatters": {
+    "simple": {
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s - %(lineno)d"
+    }
+  },
+  "filters": {
+    "error_filters": {
+      "()": "loger.logger_helper.LevelFilter",
+      "level": 40
+    },
+    "debug_filters": {
+      "()": "loger.logger_helper.LevelFilter",
+      "level": 10
+    }
+  },
+  "handlers": {
+    "console": {
+      "class": "logging.StreamHandler",
+      "formatter": "simple"
+    },
+    "error_file": {
+      "()": "loger.logger_helper.LevelFileHandler",
+      "file_name": "error.log",
+      "formatter": "simple",
+      "level": "ERROR",
+      "filters": [
+        "error_filters"
+      ],
+      "encoding": "utf-8"
+    }
+  },
+  "loggers": {
+    "root": {
+      "handlers": [
+        "console",
+        "error_file"
+      ],
+      "level": "DEBUG"
+    }
+  }
+}
